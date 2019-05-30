@@ -3,6 +3,7 @@ services:
 
   scheduled_job:
     build: ./scheduled_job
+    entrypoint: ["./wait-for-it.sh", "db:1521", "--timeout=0", "--strict", "--", "/bin/bash", "-c", "crond && tail -f /var/log/cron.log" ]
     depends_on:
       - db
     networks:
