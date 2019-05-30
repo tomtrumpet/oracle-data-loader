@@ -1,11 +1,10 @@
-version: "2.1"
+version: "3.3"
 services:
 
   scheduled_job:
     build: ./scheduled_job
     depends_on:
-      db:
-        condition: service_healthy
+      - db
     networks:
      - oracle
   
@@ -16,6 +15,13 @@ services:
     networks:
      - oracle
   
+  db_bootstrap:
+    build: ./db_bootstrap
+    depends_on:
+      - db
+    networks:
+      - oracle
+
 networks:
   oracle:
     driver: "bridge"

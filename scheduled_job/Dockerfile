@@ -33,4 +33,4 @@ ADD things.data /app/things.data
 ADD things.ctl /app/things.ctl
 
 # run cron
-CMD crond && tail -f /var/log/cron.log
+CMD sleep 60 && crond && tail -f /var/log/cron.log
