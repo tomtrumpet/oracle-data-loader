@@ -1,0 +1,4 @@
+SHELL=/bin/bash
+
+* * * * * /app/load.sh 2>/proc/1/fd/2 >&2
+#empty line
