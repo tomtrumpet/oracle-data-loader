@@ -1,5 +1,7 @@
 # Oracle Data Loader
 
+Exploring loading data into Oracle using SQL*Loader and Exteral Tables.
+
 ### Dockerised Components
 
 1. `Product API` returning a large array of JSON objects, including base64 encoded images.
@@ -25,4 +27,4 @@ First attempt using static CSV file with SQL*Loader
 
 #### Useful commands
 
-docker exec -it <oracle_container> sqlplus SYSTEM/Oradoc_db1@db:1521/ORCLCDB.localdomain
+`docker exec -it <oracle_container> sqlplus SYSTEM/Oradoc_db1@db:1521/ORCLCDB.localdomain`
