@@ -32,9 +32,5 @@ RUN chmod +x /app/load.sh
 ADD things.data /app/things.data
 ADD things.ctl /app/things.ctl
 
-# wait for it
-ADD wait-for-it.sh /app/wait-for-it.sh
-RUN chmod +x /app/wait-for-it.sh
-
 # run cron
 CMD crond && tail -f /var/log/cron.log
