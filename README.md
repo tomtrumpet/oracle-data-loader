@@ -4,7 +4,7 @@ Exploring loading data into Oracle using SQL*Loader and Exteral Tables.
 
 ### Dockerised Components
 
-1. `Product API` returning a large array of JSON objects, including base64 encoded images.
+1. ~~`Product API` returning a large array of JSON objects, including base64 encoded images.~~
 2. `Scheduled Job` to load product data from `Product API` into `Oracle Database` using SQL*Loader.
 3. `Oracle Database` 12c.
 
@@ -21,7 +21,8 @@ Exploring loading data into Oracle using SQL*Loader and Exteral Tables.
 
 1. ~~The triggered `Scheduled Job` will fetch all products from the `Product API`.~~
 2. ~~The returned result will be persisted to a JSON file.~~
-3. ~~Use SQL*Loader to load JSON file.~~
+3. Use SQL*Loader to load data file into staging table.
+4. Use INSERT INTO SELECT FROM with /*+ APPEND */ query hint to load staging data into live table.
 
 First attempt using static CSV file with SQL*Loader
 
