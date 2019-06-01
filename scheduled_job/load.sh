@@ -15,22 +15,32 @@ cat /app/sqlldr.log
 
 echo "Load staging table into live table"
 
+# Keeping for reference, an approach quicker than traditional inserts, but not as quick as insert /*+ append */
+
+# DECLARE
+#     TYPE t IS TABLE OF things_staging%ROWTYPE;
+#     things_temp t := t();
+#   BEGIN
+#     SELECT * BULK COLLECT INTO things_temp FROM things_staging;
+  
+#     FORALL i in things_temp.first .. things_temp.last
+#       INSERT INTO things VALUES things_temp(i);
+#       COMMIT;
+#   END;
+#   /
+
 sqlplus -s system/Oradoc_db1@db:1521/ORCLCDB.localdomain <<EOF
   SET TIMING ON;
-  DECLARE
-    TYPE t IS TABLE OF things_staging%ROWTYPE;
-    things_temp t := t();
-  BEGIN
-    SELECT * BULK COLLECT INTO things_temp FROM things_staging;
-  
-    FORALL i in things_temp.first .. things_temp.last
-      INSERT INTO things VALUES things_temp(i);
-      COMMIT;
-  END;
-  /
 
+  INSERT /*+ APPEND */
+  INTO things (id, thing)
+  SELECT id, thing
+  FROM things_staging;
+  COMMIT;
+  
   SELECT COUNT(*) FROM things;
-  SET TIMIN OFF;
+  
+  SET TIMING OFF;
   QUIT
 EOF
 
