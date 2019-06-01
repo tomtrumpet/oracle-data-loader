@@ -8,7 +8,11 @@ sqlplus -s /nolog <<EOF
 EOF
 
 echo "SQL*Loader loading from disk into staging table"
-/usr/lib/oracle/19.3/client64/bin/sqlldr system/Oradoc_db1@db:1521/ORCLCDB.localdomain direct=true control=/app/things.ctl log=/app/sqlldr.log bad=/app/sqlldr.bad
+/usr/lib/oracle/19.3/client64/bin/sqlldr system/Oradoc_db1@db:1521/ORCLCDB.localdomain \
+  direct=true \
+  control=/app/things.ctl \
+  log=/app/sqlldr.log \
+  bad=/app/sqlldr.bad
 
 echo "SQL*Loader logs"
 cat /app/sqlldr.log
