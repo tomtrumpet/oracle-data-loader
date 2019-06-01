@@ -10,7 +10,6 @@ RUN  yum -y install oracle-release-el7 && yum-config-manager --enable ol7_oracle
      yum -y install oracle-instantclient${release}.${update}-tools && \
      rm -rf /var/cache/yum
 
-# Uncomment if the tools package is added
 ENV PATH=$PATH:/usr/lib/oracle/${release}.${update}/client64/bin
 
 WORKDIR /app
@@ -18,7 +17,6 @@ WORKDIR /app
 ADD ./bootstrap.sh /app/bootstrap.sh
 RUN chmod +x /app/bootstrap.sh
 
-# wait for it
 ADD wait-for-it.sh /app/wait-for-it.sh
 RUN chmod +x /app/wait-for-it.sh
 
